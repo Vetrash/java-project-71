@@ -1,17 +1,19 @@
 package hexlet.code.utils;
 
-import com.fasterxml.jackson.databind.JsonNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Collections;
 
 public class Comparison {
 
-    public static String flat(JsonNode file1, JsonNode file2) {
-
-        List<String> keys1 = new ArrayList<>();
-        List<String> keys2 = new ArrayList<>();
-        file1.fieldNames().forEachRemaining(keys1::add);
-        file2.fieldNames().forEachRemaining(keys2::add);
+    public static List<Diffs> getDiff(Map<String, Object> file1, Map<String, Object> file2) {
+        var diffData = new ArrayList<Diffs>();
+        List<String> keys1 = new ArrayList<>(file1.keySet());
+        List<String> keys2 = new ArrayList<>(file2.keySet());
 
         Set<String> set = new LinkedHashSet<>();
         set.addAll(keys1);
@@ -19,58 +21,26 @@ public class Comparison {
         ArrayList<String> allKeys = new ArrayList<>(set);
         Collections.sort(allKeys);
 
-
-        StringBuilder solution = new StringBuilder();
-
-        solution.append("{");
-        solution.append(System.lineSeparator());
         for (String key : allKeys) {
-            var value1 = file1.get(key);
-            var value2 = file2.get(key);
-            //Добавление значения
+            Object value1 = file1.get(key);
+            Object value2 = file2.get(key);
+
+            var event = Diffs.EventType.NOTCHANGED;
+
             if (value1 == null && value2 != null) {
-                solution.append("+ ");
-                solution.append(key);
-                solution.append(": ");
-                solution.append(value2);
-                solution.append(System.lineSeparator());
-            }
-            //Удаление значения
-            if (value1 != null && value2 == null) {
-                solution.append("- ");
-                solution.append(key);
-                solution.append(": ");
-                solution.append(value1);
-                solution.append(System.lineSeparator());
-            }
-
-            if (value1 != null && value2 != null) {
-
+                event = Diffs.EventType.ADDED; // Добавление значения (было только во втором файле)
+            } else if (value1 != null && value2 == null) {
+                event = Diffs.EventType.REMOVED;  // Удаление значения (было только в первом файле)
+            } else if (value1 != null && value2 != null) {
                 if (value1.equals(value2)) {
-                    solution.append("  ");
-                    solution.append(key);
-                    solution.append(": ");
-                    solution.append(value1);
-                    solution.append(System.lineSeparator());
-
+                    event = Diffs.EventType.NOTCHANGED;
                 } else {
-                    solution.append("- ");
-                    solution.append(key);
-                    solution.append(": ");
-                    solution.append(value1);
-                    solution.append(System.lineSeparator());
-
-                    solution.append("+ ");
-                    solution.append(key);
-                    solution.append(": ");
-                    solution.append(value2);
-                    solution.append(System.lineSeparator());
+                    event = Diffs.EventType.CHANGED;
                 }
-
             }
+            var diff = new Diffs(key, value1, value2, event);
+            diffData.add(diff);
         }
-        ;
-        solution.append("}");
-        return solution.toString();
+        return diffData;
     }
 }

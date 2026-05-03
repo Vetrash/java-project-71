@@ -5,10 +5,16 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
 
-public class FileReader{
+public class FileReader {
+
+
+    public static String getFileExtension(String filePath) {
+        int lastDotIndex = filePath.lastIndexOf('.');
+        return filePath.substring(lastDotIndex + 1).toLowerCase();
+    }
+
 
     public static String read(String filePath) {
-        System.out.print(filePath);
         try {
             // Читаем все содержимое файла в строкуPath
             Path path = Paths.get(System.getProperty("user.dir"), filePath);

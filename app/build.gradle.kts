@@ -3,7 +3,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.53.0"
     application
     checkstyle
-    id ("org.sonarqube") version "7.2.3.7755"
+    id("org.sonarqube") version "7.2.3.7755"
 
 }
 
@@ -20,6 +20,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("info.picocli:picocli:4.7.7")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
 }
 
 application { mainClass.set("hexlet.code.App") }

@@ -1,17 +1,19 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
 
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 import hexlet.code.utils.FileReader;
 import hexlet.code.utils.Parser;
 import hexlet.code.utils.Comparison;
 
-import com.fasterxml.jackson.databind.JsonNode;
 
 @Command(name = "gendiff",
         mixinStandardHelpOptions = true,
@@ -44,19 +46,18 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-
+        var formatFile1 = FileReader.getFileExtension((filepath1));
         var file1Context = FileReader.read(filepath1);
-        JsonNode file1 = Parser.json(file1Context);
+        Map<String, Object> file1 = Parser.parse(file1Context, formatFile1);
+
+        var formatFile2 = FileReader.getFileExtension((filepath2));
         var file2Context = FileReader.read(filepath2);
-        JsonNode file2 = Parser.json(file2Context);
+        Map<String, Object> file2 = Parser.parse(file2Context, formatFile2);
 
-//        file2.fields().forEachRemaining(field -> {
-//            System.out.println(field.getKey() + ": " + field.getValue());
-//        });
-
-        String ComparisonString = Comparison.flat(file1, file2);
+        var diffsData = Comparison.getDiff(file1, file2);
+        String formatingDiff = Formatter.formatting(diffsData, format);
         System.out.println("");
-        System.out.println(ComparisonString);
+        System.out.println(formatingDiff);
 
         return 0;
     }

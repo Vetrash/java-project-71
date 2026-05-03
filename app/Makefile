@@ -7,7 +7,7 @@ run-dist:
 
 .PHONY: run-dist-fp
 run-dist-fr:
-	./build/install/app/bin/app  -f json src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
+	./build/install/app/bin/app   src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
 
 .PHONY: build
 build:

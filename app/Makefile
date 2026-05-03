@@ -13,10 +13,14 @@ run-dist-fr:
 build:
 	./gradlew clean build
 
+.PHONY: run-test
+run-test:
+	gradle test
+
 .PHONY: build-dist
 build-dist:
 	./gradlew installDist
 
 .PHONY: checkstyle
 checkstyle:
-	./gradlew checkstyleMainffffff
+	./gradlew checkstyleMain

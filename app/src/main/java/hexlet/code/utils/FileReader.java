@@ -21,11 +21,11 @@ public class FileReader {
             String content = new String(Files.readAllBytes(path));
             return content;
         } catch (IOException e) {
-            System.err.println("Ошибка при чтении файла: " + e.getMessage());
-            return null;
+            throw new RuntimeException("Ошибка при чтении файла: " + e.getMessage());
         }
 
     }
+
 
 }
 

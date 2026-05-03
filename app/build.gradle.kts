@@ -21,6 +21,7 @@ dependencies {
     implementation("info.picocli:picocli:4.7.7")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
+    testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 application { mainClass.set("hexlet.code.App") }
@@ -29,7 +30,6 @@ sonar {
     properties {
         property("sonar.projectKey", "Vetrash_java-project-71")
         property("sonar.organization", "vetrash")
-        property("sonar.coverage.skip", "true")
     }
 }
 

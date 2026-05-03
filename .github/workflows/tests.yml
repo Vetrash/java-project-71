@@ -1,0 +1,28 @@
+name: Java CI with Gradle
+
+# Запускать workflow при каждом push в любую ветку
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Клонируем код репозитория в виртуальную машину
+      - uses: actions/checkout@v4
+
+      # 2. Устанавливаем нужную версию Java
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21' # Укажите вашу версию
+          distribution: 'temurin' # Дистрибутив Java
+          cache: gradle # Включаем кэширование зависимостей Gradle
+
+      # 3. Даём права на выполнение gradlew (только для Linux/Mac)
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # 4. Запуск тестов
+      - name: Run tests
+        run: ./gradlew test

@@ -1,5 +1,7 @@
 package hexlet.code.utils;
 
+import java.util.Objects;
+
 public class Diffs {
     public EventType event;
     public String key;
@@ -15,7 +17,7 @@ public class Diffs {
 
     }
 
-    Diffs(String key, Object oldValue, Object newValue, EventType event) {
+    public Diffs(String key, Object oldValue, Object newValue, EventType event) {
         this.key = key;
         this.oldValue = oldValue;
         this.newValue = newValue;
@@ -37,4 +39,34 @@ public class Diffs {
     public Object getNewValue() {
         return this.newValue;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Diffs diffs = (Diffs) o;
+        return event == diffs.event
+                && Objects.equals(key, diffs.key)
+                && Objects.equals(oldValue, diffs.oldValue)
+                && Objects.equals(newValue, diffs.newValue);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(event, key, oldValue, newValue);
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("Diffs{key='%s', old=%s, new=%s, event=%s}",
+                key, oldValue, newValue, event);
+    }
+
 }

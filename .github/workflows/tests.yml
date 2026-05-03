@@ -13,13 +13,13 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '21' # Укажите вашу версию
+          java-version: '21'
           distribution: 'temurin' # Дистрибутив Java
           cache: gradle # Включаем кэширование зависимостей Gradle
 
       # 3. Даём права на выполнение gradlew (только для Linux/Mac)
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x app/gradlew
 
       # 4. Запуск тестов
       - name: Run tests

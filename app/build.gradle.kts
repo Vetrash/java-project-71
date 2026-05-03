@@ -3,6 +3,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.53.0"
     application
     checkstyle
+    id("jacoco")
     id("org.sonarqube") version "7.2.3.7755"
 
 }
@@ -12,6 +13,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+jacoco {
+    toolVersion = "0.8.12"
 }
 
 dependencies {
@@ -26,6 +31,8 @@ dependencies {
 
 application { mainClass.set("hexlet.code.App") }
 
+
+
 sonar {
     properties {
         property("sonar.projectKey", "Vetrash_java-project-71")
@@ -39,4 +46,16 @@ tasks.test {
 
 tasks.getByName("run", JavaExec::class) {
     standardInput = System.`in`
+}
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
 }

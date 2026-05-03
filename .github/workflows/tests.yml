@@ -1,6 +1,5 @@
-name: Java CI with Gradle
+name: tests
 
-# Запускать workflow при каждом push в любую ветку
 on: [ push ]
 
 jobs:
@@ -8,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Клонируем код репозитория в виртуальную машину
       - uses: actions/checkout@v4
 
       # 2. Устанавливаем нужную версию Java
@@ -25,4 +23,4 @@ jobs:
 
       # 4. Запуск тестов
       - name: Run tests
-        run: ./gradlew test
+        run: cd app && ./gradlew test

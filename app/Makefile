@@ -17,6 +17,10 @@ build:
 run-test:
 	gradle test
 
+.PHONY: run-chekstyleTest
+run-chekstyleTest:
+	./gradlew checkstyleTest
+
 .PHONY: build-dist
 build-dist:
 	./gradlew installDist

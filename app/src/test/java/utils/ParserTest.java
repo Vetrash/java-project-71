@@ -8,7 +8,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
 
@@ -17,7 +21,20 @@ class ParserTest {
     @DisplayName("Парсинг JSON")
     void testJsonParsing() throws IOException {
         String format = "json";
-        String content = "{\n" + "  \"setting1\": \"Some value\",\n" + "  \"setting2\": 200,\n" + "  \"setting3\": true,\n" + "  \"numbers1\": [\n" + "    1,\n" + "    2,\n" + "    3,\n" + "    4\n" + "  ],\n" + "  \"default\": null\n" + "}";
+        String content = """
+                {
+                  "setting1": "Some value",
+                  "setting2": 200,
+                  "setting3": true,
+                  "numbers1": [
+                    1,
+                    2,
+                    3,
+                    4
+                  ],
+                  "default": null
+                }
+                """;
         Map<String, Object> result = Parser.parse(content, format);
         assertNotNull(result);
         assertEquals(5, result.size());
@@ -76,6 +93,4 @@ class ParserTest {
         assertTrue(exception.getMessage().contains("Unavailable format to parse"));
         assertTrue(exception.getMessage().contains(format));
     }
-
-
 }

@@ -1,6 +1,5 @@
-package utils;
+package hexlet.code.utils;
 
-import hexlet.code.utils.Parser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -76,6 +75,7 @@ class ParserTest {
         assertEquals(true, result.get("setting3"));
         Object numbersObj = result.get("numbers1");
         assertInstanceOf(List.class, numbersObj);
+        @SuppressWarnings("unchecked")
         List<Integer> numbersJson = (List<Integer>) numbersObj;
         assertEquals(List.of(1, 2, 3, 4), numbersJson);
         assertEquals(null, result.get("default"));

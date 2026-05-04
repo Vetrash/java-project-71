@@ -1,6 +1,5 @@
-package formatters;
+package hexlet.code.formatters;
 
-import hexlet.code.formatters.Formatter;
 import hexlet.code.utils.Comparison;
 import hexlet.code.utils.Diffs;
 import hexlet.code.utils.FileReader;
@@ -12,8 +11,10 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class FormatterTest {
@@ -104,5 +105,17 @@ class FormatterTest {
                 }
                 """;
         assertThat(actual).isEqualToIgnoringWhitespace(expected);
+    }
+
+    @Test
+    @DisplayName("Проверка форматера на неизвестный формат")
+    void testUnknown() throws IOException {
+        String format = "unknown";
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            Formatter.formatting(diffsData, format);
+        });
+        assertTrue(exception.getMessage().contains("Unavailable functionality is selected"));
+        assertTrue(exception.getMessage().contains(format));
     }
 }

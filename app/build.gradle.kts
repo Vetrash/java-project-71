@@ -15,10 +15,6 @@ repositories {
     mavenCentral()
 }
 
-jacoco {
-    toolVersion = "0.8.12"
-}
-
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -40,15 +36,18 @@ sonar {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.14"
+}
+
 tasks.test {
     useJUnitPlatform()
+
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 tasks.getByName("run", JavaExec::class) {
     standardInput = System.`in`
-}
-tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
 }
 
 tasks.jacocoTestReport {
@@ -58,4 +57,9 @@ tasks.jacocoTestReport {
         html.required.set(true)
         csv.required.set(false)
     }
+    executionData.setFrom(fileTree(buildDir).include("jacoco/*.exec"))
 }
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.jacocoTestReport)
+}
+

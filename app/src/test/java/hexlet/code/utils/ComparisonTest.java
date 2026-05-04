@@ -1,9 +1,5 @@
-package utils;
+package hexlet.code.utils;
 
-import hexlet.code.utils.Comparison;
-import hexlet.code.utils.Diffs;
-import hexlet.code.utils.FileReader;
-import hexlet.code.utils.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

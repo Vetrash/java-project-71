@@ -15,7 +15,7 @@ build:
 
 .PHONY: run-test
 run-test:
-	gradle test
+	./gradlew test
 
 .PHONY: run-chekstyleTest
 run-chekstyleTest:

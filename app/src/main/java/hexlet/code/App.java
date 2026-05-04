@@ -39,18 +39,18 @@ public class App implements Callable<Integer> {
 
 
     public static void main(String[] args) {
-        // Создаем экземпляр App и передаем аргументы командной строки
-        int exitCode = new CommandLine(new App()).execute(args);
-        System.exit(exitCode);
+        System.exit(execute(args));
+    }
+
+    public static int execute(String[] args) {
+        return new CommandLine(new App()).execute(args);
     }
 
     @Override
     public Integer call() throws Exception {
         var formatFile1 = FileReader.getFileExtension((filepath1));
         var file1Context = FileReader.read(filepath1);
-        System.out.println(file1Context);
         Map<String, Object> file1 = Parser.parse(file1Context, formatFile1);
-        System.out.println(file1);
 
         var formatFile2 = FileReader.getFileExtension((filepath2));
         var file2Context = FileReader.read(filepath2);
@@ -58,9 +58,6 @@ public class App implements Callable<Integer> {
 
         var diffsData = Comparison.getDiff(file1, file2);
         String formatingDiff = Formatter.formatting(diffsData, format);
-        System.out.println("");
-        System.out.println(formatingDiff);
-
         return 0;
     }
 }

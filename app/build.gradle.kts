@@ -15,14 +15,23 @@ repositories {
     mavenCentral()
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
+val jacksonVersion = "2.17.2"
+val picocliVersion = "4.7.7"
+val assertjVersion = "3.27.6"
+
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("info.picocli:picocli:4.7.7")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
-    testImplementation("org.assertj:assertj-core:3.27.6")
+
+    implementation("info.picocli:picocli:$picocliVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
+    testImplementation("org.assertj:assertj-core:$assertjVersion")
 }
 
 application { mainClass.set("hexlet.code.App") }
@@ -57,7 +66,6 @@ tasks.jacocoTestReport {
         html.required.set(true)
         csv.required.set(false)
     }
-    executionData.setFrom(fileTree(buildDir).include("jacoco/*.exec"))
 }
 tasks.jacocoTestCoverageVerification {
     dependsOn(tasks.jacocoTestReport)

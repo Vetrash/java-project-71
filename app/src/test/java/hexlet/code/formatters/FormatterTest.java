@@ -49,7 +49,6 @@ class FormatterTest {
                 Property 'verbose' was added with value: true
                 """;
         assertEquals(expected, actual);
-        System.out.println(actual);
     }
 
     @Test

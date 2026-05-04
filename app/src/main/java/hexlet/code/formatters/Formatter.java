@@ -5,9 +5,14 @@ import hexlet.code.utils.Diffs;
 
 import java.util.List;
 
-public class Formatter {
+public final class Formatter {
+
+    private Formatter() {
+        throw new UnsupportedOperationException("Utility class cannot be instantiated");
+    }
 
     public static String formatting(List<Diffs> diffData, String format) throws JsonProcessingException {
+
 
         switch (format) {
             case "plain":

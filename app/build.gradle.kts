@@ -8,15 +8,15 @@ plugins {
 
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-}
-
-dependencyLocking {
-    lockAllConfigurations()
 }
 
 val jacksonVersion = "2.17.2"

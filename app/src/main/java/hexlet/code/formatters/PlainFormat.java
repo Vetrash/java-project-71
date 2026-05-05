@@ -63,6 +63,6 @@ public class PlainFormat {
             }
 
         });
-        return solution.toString();
+        return solution.toString().trim();
     }
 }

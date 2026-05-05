@@ -21,7 +21,6 @@ public class FileReader {
             if (!path.isAbsolute()) {
                 path = Paths.get(System.getProperty("user.dir")).resolve(filePath);
             }
-            
             String content = new String(Files.readAllBytes(path));
             return content;
         } catch (IOException e) {

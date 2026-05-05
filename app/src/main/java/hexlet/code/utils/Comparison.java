@@ -2,10 +2,11 @@ package hexlet.code.utils;
 
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.Collections;
 
 public class Comparison {
@@ -22,17 +23,17 @@ public class Comparison {
         Collections.sort(allKeys);
 
         for (String key : allKeys) {
-            Object value1 = file1.get(key);
-            Object value2 = file2.get(key);
+            Object value1 = file1.getOrDefault(key, "empty");
+            Object value2 = file2.getOrDefault(key, "empty");
 
             var event = Diffs.EventType.NOTCHANGED;
 
-            if (value1 == null && value2 != null) {
+            if (value1 == "empty" && value2 != "empty") {
                 event = Diffs.EventType.ADDED; // Добавление значения (было только во втором файле)
-            } else if (value1 != null && value2 == null) {
+            } else if (value1 != "empty" && value2 == "empty") {
                 event = Diffs.EventType.REMOVED;  // Удаление значения (было только в первом файле)
-            } else if (value1 != null && value2 != null) {
-                if (value1.equals(value2)) {
+            } else if (value1 != "empty" && value2 != "empty") {
+                if (Objects.equals(value1, value2)) {
                     event = Diffs.EventType.NOTCHANGED;
                 } else {
                     event = Diffs.EventType.CHANGED;

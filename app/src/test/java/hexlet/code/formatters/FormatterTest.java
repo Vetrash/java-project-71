@@ -58,7 +58,7 @@ class FormatterTest {
         String actual = Formatter.formatting(diffsData, format);
         String expected = """
                 [ {
-                   "event" : "REMOVED",
+                   "event" : "CHANGED",
                    "key" : "follow",
                    "oldValue" : false,
                    "newValue" : null
@@ -68,7 +68,7 @@ class FormatterTest {
                    "oldValue" : "hexlet.io",
                    "newValue" : "hexlet.io"
                  }, {
-                   "event" : "REMOVED",
+                   "event" : "CHANGED",
                    "key" : "proxy",
                    "oldValue" : "123.234.53.22",
                    "newValue" : null

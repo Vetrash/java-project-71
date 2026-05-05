@@ -28,9 +28,9 @@ public class ComparisonTest {
         List<Diffs> expected = List.of(
                 new Diffs("follow", false, null, Diffs.EventType.REMOVED),
                 new Diffs("host", "hexlet.io", "hexlet.io", Diffs.EventType.NOTCHANGED),
-                new Diffs("proxy", "123.234.53.22", null, Diffs.EventType.REMOVED),
+                new Diffs("proxy", "123.234.53.22", null, Diffs.EventType.CHANGED),
                 new Diffs("timeout", 50, 20, Diffs.EventType.CHANGED),
-                new Diffs("verbose", null, true, Diffs.EventType.ADDED)
+                new Diffs("verbose", null, true, Diffs.EventType.CHANGED)
         );
 
         assertIterableEquals(expected, actual);

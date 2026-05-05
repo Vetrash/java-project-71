@@ -14,34 +14,34 @@ public class StylishFormat {
         diffData.forEach(diffs -> {
             switch (diffs.event) {
                 case ADDED:
-                    solution.append("+ ");
+                    solution.append("  + ");
                     solution.append(diffs.key);
                     solution.append(": ");
                     solution.append(diffs.newValue);
                     solution.append(System.lineSeparator());
                     break;
                 case REMOVED:
-                    solution.append("- ");
+                    solution.append("  - ");
                     solution.append(diffs.key);
                     solution.append(": ");
                     solution.append(diffs.oldValue);
                     solution.append(System.lineSeparator());
                     break;
                 case CHANGED:
-                    solution.append("- ");
+                    solution.append("  - ");
                     solution.append(diffs.key);
                     solution.append(": ");
                     solution.append(diffs.oldValue);
                     solution.append(System.lineSeparator());
 
-                    solution.append("+ ");
+                    solution.append("  + ");
                     solution.append(diffs.key);
                     solution.append(": ");
                     solution.append(diffs.newValue);
                     solution.append(System.lineSeparator());
                     break;
                 case NOTCHANGED:
-                    solution.append("  ");
+                    solution.append("    ");
                     solution.append(diffs.key);
                     solution.append(": ");
                     solution.append(diffs.oldValue);

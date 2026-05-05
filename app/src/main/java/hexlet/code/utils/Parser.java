@@ -34,9 +34,10 @@ public class Parser {
             case "json":
                 return json(content);
             case "yaml":
+            case "yml":
                 return yaml(content);
             default:
-                throw new RuntimeException("Unavailable format to parse" + format);
+                throw new RuntimeException("Unavailable format to parse " + format);
 
         }
     }

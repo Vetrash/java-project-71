@@ -16,8 +16,12 @@ public class FileReader {
 
     public static String read(String filePath) {
         try {
-            // Читаем все содержимое файла в строкуPath
-            Path path = Paths.get(System.getProperty("user.dir"), filePath);
+            Path path = Paths.get(filePath);
+            // Если путь относительный, то резолвим относительно текущей директории
+            if (!path.isAbsolute()) {
+                path = Paths.get(System.getProperty("user.dir")).resolve(filePath);
+            }
+            
             String content = new String(Files.readAllBytes(path));
             return content;
         } catch (IOException e) {

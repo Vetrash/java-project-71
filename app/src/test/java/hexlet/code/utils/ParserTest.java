@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
-
+    private final int expectedSize = 5;
+    private final int expectedSetting2 = 200;
+    private final Integer[] expectedArray = {1, 2, 3, 4};
+    private final List<Integer> expectedNumbers = Arrays.asList(expectedArray);
 
     @Test
     @DisplayName("Парсинг JSON")
@@ -36,15 +40,15 @@ class ParserTest {
                 """;
         Map<String, Object> result = Parser.parse(content, format);
         assertNotNull(result);
-        assertEquals(5, result.size());
+        assertEquals(expectedSize, result.size());
         assertEquals("Some value", result.get("setting1"));
-        assertEquals(200, result.get("setting2"));
+        assertEquals(expectedSetting2, result.get("setting2"));
         assertEquals(true, result.get("setting3"));
 
         Object numbersObj = result.get("numbers1");
         assertInstanceOf(List.class, numbersObj);
         List<Integer> numbersJson = (List<Integer>) numbersObj;
-        assertEquals(List.of(1, 2, 3, 4), numbersJson);
+        assertEquals(expectedNumbers, numbersJson);
         assertEquals(null, result.get("default"));
 
     }
@@ -69,15 +73,15 @@ class ParserTest {
 
         Map<String, Object> result = Parser.parse(content, format);
         assertNotNull(result);
-        assertEquals(5, result.size());
+        assertEquals(expectedSize, result.size());
         assertEquals("Some value", result.get("setting1"));
-        assertEquals(200, result.get("setting2"));
+        assertEquals(expectedSetting2, result.get("setting2"));
         assertEquals(true, result.get("setting3"));
         Object numbersObj = result.get("numbers1");
         assertInstanceOf(List.class, numbersObj);
         @SuppressWarnings("unchecked")
         List<Integer> numbersJson = (List<Integer>) numbersObj;
-        assertEquals(List.of(1, 2, 3, 4), numbersJson);
+        assertEquals(expectedNumbers, numbersJson);
         assertEquals(null, result.get("default"));
     }
 

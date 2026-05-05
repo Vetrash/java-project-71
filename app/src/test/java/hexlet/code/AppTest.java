@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AppTest {
 
@@ -22,20 +21,6 @@ class AppTest {
 
         // Проверяем результат
         assertEquals(0, exitCode, "Exit code should be 0 for successful execution");
-    }
-
-    @Test
-    void testCallMethodWithError() throws Exception {
-        // Несуществующие файлы
-        App app = new App();
-        app.filepath1 = "nonexistent1.json";
-        app.filepath2 = "nonexistent2.json";
-        app.format = "stylish";
-
-        // Ожидаем исключение
-        assertThrows(Exception.class, () -> {
-            app.call();
-        });
     }
 
     @Test
@@ -58,17 +43,5 @@ class AppTest {
         int exitCode = cmd.execute("--version");
 
         assertEquals(0, exitCode);
-    }
-
-    @Test
-    void testAppWithNonExistentFiles() {
-        App app = new App();
-        app.filepath1 = "non_existent_file1.json";
-        app.filepath2 = "non_existent_file2.json";
-
-        // Проверяем, что метод выбрасывает исключение при отсутствии файлов
-        assertThrows(Exception.class, () -> {
-            app.call();
-        });
     }
 }

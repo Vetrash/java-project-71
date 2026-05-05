@@ -2,11 +2,11 @@ package hexlet.code.utils;
 
 import java.util.Objects;
 
-public class Diffs {
-    public EventType event;
-    public String key;
-    public Object oldValue;
-    public Object newValue;
+public final class Diffs {
+    private EventType event;
+    private String key;
+    private Object oldValue;
+    private Object newValue;
 
 
     public enum EventType {
@@ -51,9 +51,9 @@ public class Diffs {
         }
         Diffs diffs = (Diffs) o;
         return event == diffs.event
-                && Objects.equals(key, diffs.key)
-                && Objects.equals(oldValue, diffs.oldValue)
-                && Objects.equals(newValue, diffs.newValue);
+               && Objects.equals(key, diffs.key)
+               && Objects.equals(oldValue, diffs.oldValue)
+               && Objects.equals(newValue, diffs.newValue);
     }
 
 

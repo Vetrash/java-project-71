@@ -31,27 +31,27 @@ public class PlainFormat {
         StringBuilder solution = new StringBuilder();
 
         diffData.forEach(diffs -> {
-            switch (diffs.event) {
+            switch (diffs.getEvent()) {
                 case ADDED:
                     solution.append("Property \'");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append("\' was added with value: ");
-                    solution.append(getValueString(diffs.newValue));
+                    solution.append(getValueString(diffs.getNewValue()));
                     solution.append(System.lineSeparator());
                     break;
                 case REMOVED:
                     solution.append("Property \'");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append("\' was removed");
                     solution.append(System.lineSeparator());
                     break;
                 case CHANGED:
                     solution.append("Property \'");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append("\' was updated. From ");
-                    solution.append(getValueString(diffs.oldValue));
+                    solution.append(getValueString(diffs.getOldValue()));
                     solution.append(" to ");
-                    solution.append(getValueString(diffs.newValue));
+                    solution.append(getValueString(diffs.getNewValue()));
 
                     solution.append(System.lineSeparator());
 
@@ -59,7 +59,7 @@ public class PlainFormat {
                 case NOTCHANGED:
                     break;
                 default:
-                    throw new RuntimeException("Unavailable fevent" + diffs.event);
+                    throw new RuntimeException("Unavailable fevent" + diffs.getEvent());
             }
 
         });

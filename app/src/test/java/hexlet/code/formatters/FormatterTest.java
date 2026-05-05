@@ -47,7 +47,7 @@ class FormatterTest {
                 Property 'proxy' was removed
                 Property 'timeout' was updated. From 50 to 20
                 Property 'verbose' was added with value: true
-                """;
+                """.trim();
         assertEquals(expected, actual);
     }
 
@@ -57,33 +57,33 @@ class FormatterTest {
         String format = "json";
         String actual = Formatter.formatting(diffsData, format);
         String expected = """
-                [ {
-                   "event" : "CHANGED",
-                   "key" : "follow",
-                   "oldValue" : false,
-                   "newValue" : null
-                 }, {
-                   "event" : "NOTCHANGED",
-                   "key" : "host",
-                   "oldValue" : "hexlet.io",
-                   "newValue" : "hexlet.io"
-                 }, {
-                   "event" : "CHANGED",
-                   "key" : "proxy",
-                   "oldValue" : "123.234.53.22",
-                   "newValue" : null
-                 }, {
-                   "event" : "CHANGED",
-                   "key" : "timeout",
-                   "oldValue" : 50,
-                   "newValue" : 20
-                 }, {
-                   "event" : "ADDED",
-                   "key" : "verbose",
-                   "oldValue" : null,
-                   "newValue" : true
-                 } ]
-                """;
+                    [ {
+                      "event" : "REMOVED",
+                      "key" : "follow",
+                      "oldValue" : false,
+                      "newValue" : "empty"
+                    }, {
+                      "event" : "NOTCHANGED",
+                      "key" : "host",
+                      "oldValue" : "hexlet.io",
+                      "newValue" : "hexlet.io"
+                    }, {
+                      "event" : "REMOVED",
+                      "key" : "proxy",
+                      "oldValue" : "123.234.53.22",
+                      "newValue" : "empty"
+                    }, {
+                      "event" : "CHANGED",
+                      "key" : "timeout",
+                      "oldValue" : 50,
+                      "newValue" : 20
+                    }, {
+                      "event" : "ADDED",
+                      "key" : "verbose",
+                      "oldValue" : "empty",
+                      "newValue" : true
+                    } ]
+                """.trim();
         assertThat(actual).isEqualToIgnoringWhitespace(expected);
     }
 
@@ -102,7 +102,7 @@ class FormatterTest {
                 + timeout: 20
                 + verbose: true
                 }
-                """;
+                """.trim();
         assertThat(actual).isEqualToIgnoringWhitespace(expected);
     }
 

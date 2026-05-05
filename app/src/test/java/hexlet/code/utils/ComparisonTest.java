@@ -10,6 +10,9 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 public class ComparisonTest {
+    private final int expectedOldValue = 50;
+    private final int expectedNewValue = 20;
+
     @Test
     @DisplayName("Поиск отличий")
     void diffJson() throws IOException {
@@ -26,11 +29,11 @@ public class ComparisonTest {
         var actual = Comparison.getDiff(file1, file2);
 
         List<Diffs> expected = List.of(
-                new Diffs("follow", false, null, Diffs.EventType.REMOVED),
+                new Diffs("follow", false, "empty", Diffs.EventType.REMOVED),
                 new Diffs("host", "hexlet.io", "hexlet.io", Diffs.EventType.NOTCHANGED),
-                new Diffs("proxy", "123.234.53.22", null, Diffs.EventType.CHANGED),
-                new Diffs("timeout", 50, 20, Diffs.EventType.CHANGED),
-                new Diffs("verbose", null, true, Diffs.EventType.CHANGED)
+                new Diffs("proxy", "123.234.53.22", "empty", Diffs.EventType.REMOVED),
+                new Diffs("timeout", expectedOldValue, expectedNewValue, Diffs.EventType.CHANGED),
+                new Diffs("verbose", "empty", true, Diffs.EventType.ADDED)
         );
 
         assertIterableEquals(expected, actual);

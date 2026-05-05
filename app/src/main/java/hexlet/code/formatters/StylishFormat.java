@@ -12,43 +12,43 @@ public class StylishFormat {
         solution.append(System.lineSeparator());
 
         diffData.forEach(diffs -> {
-            switch (diffs.event) {
+            switch (diffs.getEvent()) {
                 case ADDED:
                     solution.append("  + ");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append(": ");
-                    solution.append(diffs.newValue);
+                    solution.append(diffs.getNewValue());
                     solution.append(System.lineSeparator());
                     break;
                 case REMOVED:
                     solution.append("  - ");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append(": ");
-                    solution.append(diffs.oldValue);
+                    solution.append(diffs.getOldValue());
                     solution.append(System.lineSeparator());
                     break;
                 case CHANGED:
                     solution.append("  - ");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append(": ");
-                    solution.append(diffs.oldValue);
+                    solution.append(diffs.getOldValue());
                     solution.append(System.lineSeparator());
 
                     solution.append("  + ");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append(": ");
-                    solution.append(diffs.newValue);
+                    solution.append(diffs.getNewValue());
                     solution.append(System.lineSeparator());
                     break;
                 case NOTCHANGED:
                     solution.append("    ");
-                    solution.append(diffs.key);
+                    solution.append(diffs.getKey());
                     solution.append(": ");
-                    solution.append(diffs.oldValue);
+                    solution.append(diffs.getOldValue());
                     solution.append(System.lineSeparator());
                     break;
                 default:
-                    throw new RuntimeException("Unavailable fevent" + diffs.event);
+                    throw new RuntimeException("Unavailable fevent" + diffs.getEvent());
             }
 
         });

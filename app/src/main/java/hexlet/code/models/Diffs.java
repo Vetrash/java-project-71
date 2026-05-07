@@ -1,4 +1,4 @@
-package hexlet.code.utils;
+package hexlet.code.models;
 
 import java.util.Objects;
 

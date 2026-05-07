@@ -1,0 +1,26 @@
+[ {
+  "event" : "REMOVED",
+  "key" : "follow",
+  "oldValue" : false,
+  "newValue" : "empty"
+}, {
+  "event" : "NOTCHANGED",
+  "key" : "host",
+  "oldValue" : "hexlet.io",
+  "newValue" : "hexlet.io"
+}, {
+  "event" : "REMOVED",
+  "key" : "proxy",
+  "oldValue" : "123.234.53.22",
+  "newValue" : "empty"
+}, {
+  "event" : "CHANGED",
+  "key" : "timeout",
+  "oldValue" : 50,
+  "newValue" : 20
+}, {
+  "event" : "ADDED",
+  "key" : "verbose",
+  "oldValue" : "empty",
+  "newValue" : true
+} ]

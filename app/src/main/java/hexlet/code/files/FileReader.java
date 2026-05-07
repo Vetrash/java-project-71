@@ -1,4 +1,4 @@
-package hexlet.code.utils;
+package hexlet.code.files;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -6,13 +6,6 @@ import java.nio.file.Files;
 import java.io.IOException;
 
 public class FileReader {
-
-
-    public static String getFileExtension(String filePath) {
-        int lastDotIndex = filePath.lastIndexOf('.');
-        return filePath.substring(lastDotIndex + 1).toLowerCase();
-    }
-
 
     public static String read(String filePath) {
         try {

@@ -1,7 +1,7 @@
 package hexlet.code.formatters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.utils.Diffs;
+import hexlet.code.models.Diffs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;

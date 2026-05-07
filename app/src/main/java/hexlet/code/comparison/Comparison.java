@@ -1,5 +1,7 @@
-package hexlet.code.utils;
+package hexlet.code.comparison;
 
+
+import hexlet.code.models.Diffs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +15,9 @@ public class Comparison {
 
     public static List<Diffs> getDiff(Map<String, Object> file1, Map<String, Object> file2) {
         var diffData = new ArrayList<Diffs>();
-        List<String> keys1 = new ArrayList<>(file1.keySet());
-        List<String> keys2 = new ArrayList<>(file2.keySet());
-
-        Set<String> set = new LinkedHashSet<>();
-        set.addAll(keys1);
-        set.addAll(keys2);
-        ArrayList<String> allKeys = new ArrayList<>(set);
+        Set<String> allKeysSet = new LinkedHashSet<>(file1.keySet());
+        allKeysSet.addAll(file2.keySet());
+        List<String> allKeys = new ArrayList<>(allKeysSet);
         Collections.sort(allKeys);
 
         for (String key : allKeys) {
